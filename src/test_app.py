@@ -18,6 +18,12 @@ class FlaskTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('Missing owner or repo parameters', response.data.decode())
 
+    # This test should fail because the application should not return a 500 error for the index route
+    def test_index_route_fail(self):
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 500, "The index route should not return a 500 error.")
+
+
 
 if __name__ == '__main__':
     unittest.main()
