@@ -24,6 +24,13 @@ jobs:
       
     - name: Build the Docker image
       run: docker build -t hiranjanperera/git-api-flask -f src/Dockerfile .
-      
+
+    - name: Run API tests
+      run: |
+        docker run -d --name api-test -p 5000:5000 hiranjanperera/git-api-flask
+        python src/test_app.py
+        docker stop api-test
+
     - name: Push to Dockerhub
-      run: docker push hiranjanperera/git-api-flask:latest 
+      if: success()
+      run: docker push hiranjanperera/git-api-flask:latest

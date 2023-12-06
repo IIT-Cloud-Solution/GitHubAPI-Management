@@ -32,3 +32,7 @@ curl http://localhost/
 
 git-api-flask
 kubectl config set-cluster git-api-flask --server=https://your-kubernetes-api-server:6443
+
+
+# ----------------------- API TESTING 
+pip install pytest Flask-Testing requests-mock
