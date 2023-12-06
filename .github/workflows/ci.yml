@@ -12,6 +12,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'  # Replace with your Python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flask requests  
+
+    - name: Run tests
+      run: |
+        python src/test_app.py  
+
     
     - name: Change to src directory
       run: cd src
@@ -25,14 +40,6 @@ jobs:
     - name: Build the Docker image
       run: docker build -t hiranjanperera/git-api-flask -f src/Dockerfile .
 
-    - name: Run API tests
-      run: |
-        sudo docker run -t -d --name api-test -p 5001:5001 hiranjanperera/git-api-flask
-        sleep 5
-        docker logs api-test
-        docker exec api-test python test_app.py
-        docker stop api-test
 
     - name: Push to Dockerhub
-      if: success()
       run: docker push hiranjanperera/git-api-flask:latest
