@@ -5,9 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,30 +14,43 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12'  # Replace with your Python version
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flask requests  python-dotenv 
+        pip install flask requests python-dotenv 
 
     - name: Run tests
+      id: test_step
       run: |
         python src/test_app.py  
-
     
-    - name: Change to src directory
-      run: cd src
+    # Notify via email if the tests fail
+    - name: Send Email Notification on Failure
+      if: failure()
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: GitHub Actions Failure Notification
+        body: The test step failed in ${{ github.repository }} at ${{ github.ref }}
+        to: samarageln@gmail.com
+        from: GitHub Actions
 
     - name: Login Dockerhub
+      if: success()
       env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
     - name: Build the Docker image
+      if: success()
       run: docker build -t hiranjanperera/git-api-flask -f src/Dockerfile .
 
-
     - name: Push to Dockerhub
+      if: success()
       run: docker push hiranjanperera/git-api-flask:latest
