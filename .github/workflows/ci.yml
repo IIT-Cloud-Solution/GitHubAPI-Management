@@ -23,6 +23,7 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
     - name: Build the Docker image
-      run: docker build -t hiranjanperera/git-api-flask .
+      run: docker build -t hiranjanperera/git-api-flask -f src/Dockerfile .
+      
     - name: Push to Dockerhub
       run: docker push hiranjanperera/git-api-flask:latest 
