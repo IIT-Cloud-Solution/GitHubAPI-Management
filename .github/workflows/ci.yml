@@ -33,8 +33,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
+        username: iqdeveloper7@gmail.com
+        password: developerIQ123
         subject: GitHub Actions Failure Notification
         body: The test step failed in ${{ github.repository }} at ${{ github.ref }}
         to: samarageln@gmail.com
