@@ -28,6 +28,7 @@ jobs:
     - name: Run API tests
       run: |
         docker run -d --name api-test -p 5001:5001 hiranjanperera/git-api-flask
+        sleep 5
         docker exec api-test python test_app.py
         docker stop api-test
 
