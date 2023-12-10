@@ -56,7 +56,7 @@ docker login
 sudo apt install nginx
 
 -- find the docker container ip
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 07a2484f2873
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 363cdf494560
 
 cd /etc/nginx/sites-available/
 ---- add
