@@ -47,5 +47,11 @@ sudo apt-get upgrade -y
 
 -- adding a github runner
 
+-- setup the docker in ur machine
+https://docs.docker.com/engine/install/ubuntu/
+
+docker login 
+
+
 
 
