@@ -47,6 +47,16 @@ def get_all_user_commits():
 
     return jsonify(res)
 
+@flask_app1.route('/check')
+def check():
+    owner = request.form.get('owner')
+    repo = request.form.get('repo')
+    url = f"{BASE_URL}/repos/{owner}/{repo}/commits"
+    
+    res = f"{url} and {ACCESS_TOKEN}"
+
+    return 'Hello Your App is Working!!!'
+
 
 if __name__ == '__main__':
     flask_app1.run(host='0.0.0.0', port=8080)
