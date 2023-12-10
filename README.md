@@ -52,6 +52,7 @@ https://docs.docker.com/engine/install/ubuntu/
 
 docker login 
 
+test
 
 
 
