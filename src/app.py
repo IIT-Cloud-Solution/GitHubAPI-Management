@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import os
 import requests
-from route_functions import fetch_commit_details
+from route_functions import fetch_commit_details, filter_json
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -45,6 +45,27 @@ def get_all_user_commits():
     res = fetch_commit_details(commits_info)  
 
     return jsonify(res)
+
+
+#Endpoint to get the User information
+@flask_app1.route('/user_info', methods=['GET'])
+def get_user_info():
+    username = request.form.get('username')
+
+    if not username:
+        return jsonify({"error": "Missing username parameter"}), 400
+
+    url = f"{BASE_URL}/users/{username}" #https://api.github.com/users/lahiru-98
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code != 200:
+        return jsonify({"error": "Error fetching data from GitHub"}), response.status_code
+
+    user_info = response.json()
+    filtered_user_info = filter_json(user_info, 
+                                     ['id','name', 'created_at','followers', 'following', 'collaborators', 
+                                      'owned_private_repos', 'public_repos', 'url', 'private_gists', 'public_gists'])
+    return jsonify(filtered_user_info)
 
 @flask_app1.route('/check')
 def check():
