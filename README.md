@@ -62,3 +62,5 @@ cd /etc/nginx/sites-available/
 ---- add
 -- restart nginex
 systemctl restart nginx
+
+

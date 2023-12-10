@@ -16,7 +16,6 @@ headers = {
 }
 
 
-
 flask_app1 = Flask(__name__)
 
 
@@ -36,7 +35,7 @@ def get_all_user_commits():
     
     url = f"{BASE_URL}/repos/{owner}/{repo}/commits" # https://api.github.com/repos/lahiru-98/ESD/commits
     print("BASE URL ---> ", url)
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     
     if response.status_code != 200:
         return jsonify({"error": "Error fetching data from GitHub"}), response.status_code
