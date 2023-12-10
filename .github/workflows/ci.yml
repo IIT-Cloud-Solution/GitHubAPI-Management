@@ -49,7 +49,7 @@ jobs:
       
     - name: Build the Docker image
       if: success()
-      run: docker build -t hiranjanperera/git-api-flask -f src/Dockerfile .
+      run: docker build -t hiranjanperera/git-api-flask ./src
 
     - name: Push to Dockerhub
       if: success()

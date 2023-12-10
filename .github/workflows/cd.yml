@@ -16,6 +16,6 @@ jobs:
     - name: Pull Docker image
       run: sudo docker pull hiranjanperera/git-api-flask:latest
     - name: Delete Old docker container
-      run: sudo docker rm -f cicd-pipeline-container || true
+      run: sudo docker rm -f git-api-flask:latest || true
     - name: Run Docker Container
       run: sudo docker run -d -p 5001:5001 --name cicd-pipeline-container hiranjanperera/git-api-flask

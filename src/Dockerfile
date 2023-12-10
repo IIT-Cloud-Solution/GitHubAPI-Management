@@ -1,6 +1,6 @@
 FROM python:3.12
 WORKDIR /src
-COPY . ./
+COPY . .
 RUN pip install flask requests python-dotenv 
 EXPOSE 5001
-CMD [ "python3","app.py" ]
+CMD [ "python3", "./app.py" ]
