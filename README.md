@@ -36,3 +36,16 @@ kubectl config set-cluster git-api-flask --server=https://your-kubernetes-api-se
 
 # ----------------------- API TESTING 
 pip install pytest Flask-Testing requests-mock
+
+
+cd Downloads
+chmod 400 cicd-pipeline.pem
+--ec2 ssh command
+sudo su
+sudo apt update
+sudo apt-get upgrade -y
+
+-- adding a github runner
+
+
+
