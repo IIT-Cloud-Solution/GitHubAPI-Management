@@ -52,7 +52,13 @@ https://docs.docker.com/engine/install/ubuntu/
 
 docker login 
 
-test
+-- nginex 
+sudo apt install nginx
 
+-- find the docker container ip
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 07a2484f2873
 
-
+cd /etc/nginx/sites-available/
+---- add
+-- restart nginex
+systemctl restart nginx

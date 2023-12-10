@@ -49,4 +49,4 @@ def get_all_user_commits():
 
 
 if __name__ == '__main__':
-    flask_app1.run(host='0.0.0.0', port=5001)
+    flask_app1.run(host='0.0.0.0', port=8080)
